@@ -7,7 +7,7 @@ const server = new WebSocket.Server({ port: PORT }, () => {
 
 const usersToSend = [];
 const users = [];
-const helps = [];
+const letter = [];
 
 function sendMessage(message) {
     usersToSend.forEach((user) => {
@@ -36,7 +36,7 @@ server.on('connection', (ws, incoming_request) => {
 
     sendMessage({
         users,
-        helps
+        letter
     });
 
     ws.on('message', (message) => {
