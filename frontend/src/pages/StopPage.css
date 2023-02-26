@@ -1,0 +1,19 @@
+.formInput {
+  display: flex;
+  flex-direction: column;
+}
+
+thead {
+  border-bottom: 2px solid black;
+}
+
+th {
+  border: 2px solid black;
+  text-align: center;
+  width: 10vw;
+}
+
+td {
+  border: 2px solid black;
+  text-align: center;
+}

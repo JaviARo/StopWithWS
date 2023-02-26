@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "./StopPage.css";
 
 function StopPage() {
   const [users, setUsers] = useState([]);
@@ -13,6 +14,7 @@ function StopPage() {
   const [comida, setComida] = useState();
   const [color, setColor] = useState();
   const [objeto, setObjeto] = useState();
+  const [stopInfo, setStopInfo] = useState();
 
   const { username } = useParams();
 
@@ -56,9 +58,11 @@ function StopPage() {
     ws.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
 
+      setUsers(data.users);
       setLetter(data.letter);
       setLetterSet(data.letterSet);
       setStop(data.stop);
+      setStopInfo(data.stopInfo[0]);
       console.log(data);
     };
 
@@ -72,14 +76,40 @@ function StopPage() {
     <>
       {stop === true ? (
         <div>
-          <p>Fin del juego</p>
+          <h1>Fin del juego</h1>
+          <table>
+            <thead>
+            <tr>
+              <th>Jugador</th>
+              <th>Nombre</th>
+              <th>Animal</th>
+              <th>Lugar</th>
+              <th>Comida</th>
+              <th>Color</th>
+              <th>Objeto</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{users[0].username}</td>
+              <td>{stopInfo.nombre}</td>
+              <td>{stopInfo.animal}</td>
+              <td>{stopInfo.lugar}</td>
+              <td>{stopInfo.comida}</td>
+              <td>{stopInfo.color}</td>
+              <td>{stopInfo.objeto}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
+        
       ) : (
         <div>
           {letterSet === true ? (
             <div>
-              <p>Letra: {letter}</p>
+              <h1>Letra: {letter}</h1>
               <form onSubmit={sendStop}>
+                <div className="formInput">
                 <label htmlFor="letra">Nombre</label>
                 <input
                   id="nombre"
@@ -87,6 +117,8 @@ function StopPage() {
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                 />
+                </div>
+                <div className="formInput">
                 <label htmlFor="letra">Animal</label>
                 <input
                   id="animal"
@@ -94,6 +126,8 @@ function StopPage() {
                   value={animal}
                   onChange={(e) => setAnimal(e.target.value)}
                 />
+                </div>
+                <div className="formInput">
                 <label htmlFor="letra">Lugar</label>
                 <input
                   id="lugar"
@@ -101,6 +135,8 @@ function StopPage() {
                   value={lugar}
                   onChange={(e) => setLugar(e.target.value)}
                 />
+                </div>
+                <div className="formInput">
                 <label htmlFor="letra">Color</label>
                 <input
                   id="color"
@@ -108,6 +144,8 @@ function StopPage() {
                   value={color}
                   onChange={(e) => setColor(e.target.value)}
                 />
+                </div>
+                <div className="formInput">
                 <label htmlFor="letra">Comida</label>
                 <input
                   id="comida"
@@ -115,6 +153,8 @@ function StopPage() {
                   value={comida}
                   onChange={(e) => setComida(e.target.value)}
                 />
+                </div>
+                <div className="formInput">
                 <label htmlFor="letra">Objeto</label>
                 <input
                   id="objeto"
@@ -122,6 +162,7 @@ function StopPage() {
                   value={objeto}
                   onChange={(e) => setObjeto(e.target.value)}
                 />
+                </div>
                 <button type="submit">Stop</button>
               </form>
             </div>

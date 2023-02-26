@@ -10,6 +10,7 @@ const users = [];
 let letter = "";
 let letterSet = false;
 let stop = false;
+const stopInfo = [];
 
 function sendMessage(message) {
   usersToSend.forEach((user) => {
@@ -59,6 +60,24 @@ server.on("connection", (ws, incoming_request) => {
           break;
         case "stopSend":
           stop = true;
+          stopInfo.push({
+            nombre: data.nombre,
+            animal: data.animal,
+            lugar: data.lugar,
+            comida: data.comida,
+            color: data.color,
+            objeto: data.objeto,
+          })
+          break;
+        case "gameFinished":
+          stopInfo.push({
+            nombre: data.nombre,
+            animal: data.animal,
+            lugar: data.lugar,
+            comida: data.comida,
+            color: data.color,
+            objeto: data.objeto,
+          })
           break;
       }
 
@@ -66,7 +85,8 @@ server.on("connection", (ws, incoming_request) => {
         users,
         letter,
         letterSet,
-        stop
+        stop,
+        stopInfo
       });
     } catch (e) {
       console.error("Error passing message!", e);
