@@ -28,3 +28,7 @@ Al final del juego, solo he conseguido mostrar los datos del usuario que envía 
 ## Modificaciones y adiciones al código
 
 En el backend generé dos casos en el switch para enviar la letra y el stop, además de las variables pertinentes y en el frontend las variables, las funciones que envían la petición al WebSocket, los setters y el contenido de la página mediante renderizado condicional.
+
+
+## Vídeo demostrativo del funcionamiento de la aplicación
+https://youtu.be/j9_rMXnb1ow
